@@ -15,9 +15,10 @@ export class Product extends Component {
       ProductName: "",
       SupplyKG: "",
       PriceKG: "",
-      ProductPictureUrl: "",
+      ProductPictureUrl: "defaultProduct.jpg",
       ProductDescription: "",
       DiscountPercentage: "",
+      PhotoPath: variables.PHOTO_URL,
 
       IDProductFilter: "",
       ProductNameFilter: "",
@@ -119,7 +120,7 @@ export class Product extends Component {
       ProductName: "",
       SupplyKG: "",
       PriceKG: "",
-      ProductPictureUrl: "",
+      ProductPictureUrl: "defaultProduct.jpg",
       ProductDescription: "",
       DiscountPercentage: "",
     });
@@ -134,6 +135,7 @@ export class Product extends Component {
       ProductName: dep.productName,
       SupplyKG: dep.supplyKG,
       PriceKG: dep.priceKG,
+      ProductPictureUrl: "defaultProduct.jpg",
       ProductDescription: dep.productDescription,
       DiscountPercentage: dep.discountPercentage,
     });
@@ -144,8 +146,7 @@ export class Product extends Component {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImM0NzEwMzBiLTZhZjgtNDk5YS05NzdkLWMwMDZiOWVmY2M5NSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZ2l2ZW5uYW1lIjoiQWNhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6IlBlcmljIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZW1haWxAZW1haWwuY29tIiwiZXhwIjoxNjgzNTYyMTg3LCJpc3MiOiJGVE5JVEVSUDIwMjMiLCJhdWQiOiJGVE5JVEVSUDIwMjMifQ.YhYV3nhs000m4YrvXK-VZYHYeTpR9L_uMZMHMs9nvR8",
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -155,7 +156,7 @@ export class Product extends Component {
         ProductName: this.state.ProductName,
         SupplyKG: this.state.SupplyKG,
         PriceKG: this.state.PriceKG,
-        ProductPictureUrl: "default.png",
+        ProductPictureUrl: "defaultProduct.jpg",
         ProductDescription: this.state.ProductDescription,
         DiscountPercentage: this.state.DiscountPercentage,
       }),
@@ -177,8 +178,7 @@ export class Product extends Component {
       method: "PUT",
       headers: {
         Accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImM0NzEwMzBiLTZhZjgtNDk5YS05NzdkLWMwMDZiOWVmY2M5NSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZ2l2ZW5uYW1lIjoiQWNhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6IlBlcmljIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZW1haWxAZW1haWwuY29tIiwiZXhwIjoxNjgzNTYyMTg3LCJpc3MiOiJGVE5JVEVSUDIwMjMiLCJhdWQiOiJGVE5JVEVSUDIwMjMifQ.YhYV3nhs000m4YrvXK-VZYHYeTpR9L_uMZMHMs9nvR8",
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -189,7 +189,7 @@ export class Product extends Component {
         ProductName: this.state.ProductName,
         SupplyKG: this.state.SupplyKG,
         PriceKG: this.state.PriceKG,
-        ProductPictureUrl: "default.png",
+        ProductPictureUrl: this.state.ProductPictureUrl,
         ProductDescription: this.state.ProductDescription,
         DiscountPercentage: this.state.DiscountPercentage,
       }),
@@ -212,8 +212,7 @@ export class Product extends Component {
         method: "DELETE",
         headers: {
           Accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImM0NzEwMzBiLTZhZjgtNDk5YS05NzdkLWMwMDZiOWVmY2M5NSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZ2l2ZW5uYW1lIjoiQWNhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6IlBlcmljIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZW1haWxAZW1haWwuY29tIiwiZXhwIjoxNjgzNTYyMTg3LCJpc3MiOiJGVE5JVEVSUDIwMjMiLCJhdWQiOiJGVE5JVEVSUDIwMjMifQ.YhYV3nhs000m4YrvXK-VZYHYeTpR9L_uMZMHMs9nvR8",
+          Authorization: "Bearer " + localStorage.getItem("token"),
           "Content-Type": "application/json",
         },
       })
@@ -230,6 +229,22 @@ export class Product extends Component {
     }
   }
 
+  imageUpload = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("file", e.target.files[0], e.target.files[0].name);
+
+    fetch(variables.API_URL + "users/photo", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ ProductPictureUrl: data });
+      });
+  };
+
   render() {
     const {
       products,
@@ -244,6 +259,7 @@ export class Product extends Component {
       ProductPictureUrl,
       ProductDescription,
       DiscountPercentage,
+      PhotoPath,
     } = this.state;
 
     return (
@@ -500,6 +516,18 @@ export class Product extends Component {
                     onChange={this.changeDiscountPercentage}
                   />
                 </div>
+                <div className="p-2 w-50 bd-highlight">
+                    <img
+                      width="250px"
+                      height="250px"
+                      src={PhotoPath + ProductPictureUrl}
+                    />
+                    <input
+                      className="m-2"
+                      type="file"
+                      onChange={this.imageUpload}
+                    />
+                  </div>
 
                 {IDProduct == 0 ? (
                   <button

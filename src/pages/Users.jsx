@@ -18,7 +18,7 @@ export class Users extends Component {
       City: "",
       Phone: "",
       UserRole: "",
-      ProfilePictureURL: "MainBackground.png",
+      ProfilePictureURL: "default.jpg",
       PhotoPath: variables.PHOTO_URL,
       PwdHash: "",
     };
@@ -86,11 +86,11 @@ export class Users extends Component {
       City: "",
       Phone: "",
       UserRole: "",
-      ProfilePictureURL: "MainBackground.png",
+      ProfilePictureURL: "default.jpg",
       PwdHash: "",
     });
   }
-  editClick(user) {
+/*   editClick(user) {
     this.setState({
       modalTitle: "Edit User",
       IDUser: user.idUser,
@@ -103,9 +103,9 @@ export class Users extends Component {
       Phone: user.phone,
       UserRole: user.userRole,
       ProfilePictureURL: user.profilePictureURL,
-      PwdHash: user.PwdHash,
+      PwdHash: user.pwdHash,
     });
-  }
+  } */
 
   createClick() {
     fetch(variables.API_URL + "users", {
@@ -126,7 +126,7 @@ export class Users extends Component {
         PwdHash: this.state.PwdHash,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => "Created successfuly")
       .then(
         (result) => {
           alert(result);
@@ -138,17 +138,18 @@ export class Users extends Component {
       );
   }
 
-  updateClick() {
+ /*  updateClick() {
     fetch(variables.API_URL + "users", {
       method: "PUT",
       headers: {
         Accept: "application/json",
-        Authorization: "Bearer" + localStorage.getItem("token"),
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         IDUser: this.state.IDUser,
         Email: this.state.Email,
+        Username: this.state.Username,
         FirstName: this.state.FirstName,
         LastName: this.state.LastName,
         Adress: this.state.Adress,
@@ -158,7 +159,7 @@ export class Users extends Component {
         ProfilePictureURL: this.state.ProfilePictureURL,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => "Updated successfuly")
       .then(
         (result) => {
           alert(result);
@@ -168,7 +169,7 @@ export class Users extends Component {
           alert("Failed");
         }
       );
-  }
+  } */
 
   deleteClick(id) {
     if (window.confirm("Are you sure?")) {
@@ -176,12 +177,11 @@ export class Users extends Component {
         method: "DELETE",
         headers: {
           Accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImM0NzEwMzBiLTZhZjgtNDk5YS05NzdkLWMwMDZiOWVmY2M5NSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZ2l2ZW5uYW1lIjoiQWNhIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6IlBlcmljIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZW1haWxAZW1haWwuY29tIiwiZXhwIjoxNjgzOTE3MDI2LCJpc3MiOiJGVE5JVEVSUDIwMjMiLCJhdWQiOiJGVE5JVEVSUDIwMjMifQ.sfY-D-ztXuirSVwBirU2SD09L2leJW8ZYi7bvdRJ1RY",
+          Authorization: "Bearer " + localStorage.getItem("token"),
           "Content-Type": "application/json",
         },
       })
-        .then((res) => res.json())
+        .then((res) => "Deleted successfuly")
         .then(
           (result) => {
             alert(result);
@@ -272,6 +272,7 @@ export class Users extends Component {
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     onClick={() => this.editClick(user)}
+                    disabled="true"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -402,15 +403,17 @@ export class Users extends Component {
                       />
                     </div>
 
-                    <div className="input-group mb-3">
-                      <span className="input-group-text">User Role</span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={UserRole}
-                        onChange={this.changeUserRole}
-                      />
-                    </div>
+                    {IDUser != 0 ? (
+                      <div className="input-group mb-3">
+                        <span className="input-group-text">User Role</span>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={UserRole}
+                          onChange={this.changeUserRole}
+                        />
+                      </div>
+                    ) : null}
 
                     <div className="input-group mb-3">
                       <span className="input-group-text">Password</span>
@@ -446,7 +449,7 @@ export class Users extends Component {
                   </button>
                 ) : null}
 
-                {IDUser != 0 ? (
+                {/* {IDUser != 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -454,7 +457,7 @@ export class Users extends Component {
                   >
                     Update
                   </button>
-                ) : null}
+                ) : null} */}
               </div>
             </div>
           </div>

@@ -7,6 +7,16 @@ import { Product } from "./pages/Product";
 import { Users } from "./pages/Users";
 import { Login_register } from "./pages/Login_register";
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+
+
+var token = localStorage.getItem("token");
+var decoded = jwt_decode(token);
+
+console.log(decoded);
+
+var decodedHeader = jwt_decode(token, { header: true });
+console.log(decodedHeader);
 
 function App() {
   return (
