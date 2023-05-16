@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { Product } from "./pages/Product";
 import { Users } from "./pages/Users";
 import { Login_register } from "./pages/Login_register";
+import { Orders } from "./pages/Orders";
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
@@ -26,13 +27,14 @@ function App() {
 
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top">
           <Container>
-            <Navbar.Brand href="#home">STIG</Navbar.Brand>
+            <Navbar.Brand href="#home">STIG ADMIN</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link href="/home">Home</Nav.Link>
                 <Nav.Link href="/product">Product</Nav.Link>
                 <Nav.Link href="/users">Users</Nav.Link>
+                <Nav.Link href="/orders">Orders</Nav.Link>
               </Nav>
               <Nav>
                 <Nav.Link href="/login_register">Login/Register</Nav.Link>
@@ -46,6 +48,7 @@ function App() {
           <Route path="/product" element={<Product />} />
           <Route path="/login_register" element={<Login_register />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </div>
     </BrowserRouter>

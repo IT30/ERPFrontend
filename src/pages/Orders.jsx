@@ -1,52 +1,45 @@
 import React, { Component } from "react";
 import { variables } from "../Variables";
 
-export class Product extends Component {
+export class Orders extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
+      orders: [],
       modalTitle: "",
-      IDProduct: 0,
-      IDProductType: "",
-      IDClass: "",
-      IDOrigin: "",
-      ProductName: "",
-      SupplyKG: "",
-      PriceKG: "",
-      ProductPictureURL: "defaultProduct.jpg",
-      ProductDescription: "",
-      DiscountPercentage: "",
-      PhotoPath: variables.PHOTO_URL,
+      IDOrder: 0,
+      IDUser: "",
+      TotalOrderPrice: "",
+      TransactionDate: "",
 
-      IDProductFilter: "",
-      ProductNameFilter: "",
-      productsWithoutFilter: [],
+      IDOrderFilter: "",
+      OrderNameFilter: "",
+      ordersWithoutFilter: [],
     };
   }
 
   FilterFn() {
-    var IDProductFilter = this.state.IDProductFilter;
-    var ProductNameFilter = this.state.ProductNameFilter;
+    var IDOrderFilter = this.state.IDOrderFilter;
+    var OrderNameFilter = this.state.OrderNameFilter;
 
-    var filteredData = this.state.productsWithoutFilter.filter(function (el) {
+    var filteredData = this.state.ordersWithoutFilter.filter(function (el) {
       return (
-        el.IDProduct.toString()
+        el.IDOrder.toString()
           .toLowerCase()
-          .includes(IDProductFilter.toString().trim().toLowerCase()) &&
-        el.productName
+          .includes(IDOrderFilter.toString().trim().toLowerCase()) &&
+        el.orderName
           .toString()
           .toLowerCase()
-          .includes(ProductNameFilter.toString().trim().toLowerCase())
+          .includes(OrderNameFilter.toString().trim().toLowerCase())
       );
     });
 
-    this.setState({ products: filteredData });
+    this.setState({ orders: filteredData });
   }
 
   sortResult(prop, asc) {
-    var sortedData = this.state.productsWithoutFilter.sort(function (a, b) {
+    var sortedData = this.state.ordersWithoutFilter.sort(function (a, b) {
       if (asc) {
         return a[prop] > b[prop] ? 1 : a[prop] < b[prop] ? -1 : 0;
       } else {
@@ -54,24 +47,24 @@ export class Product extends Component {
       }
     });
 
-    this.setState({ products: sortedData });
+    this.setState({ orders: sortedData });
   }
 
-  changeIDProductFilter = (e) => {
-    this.state.IDProductFilter = e.target.value;
+  changeIDOrderFilter = (e) => {
+    this.state.IDOrderFilter = e.target.value;
     this.FilterFn();
   };
-  changeProductNameFilter = (e) => {
-    this.state.ProductNameFilter = e.target.value;
+  changeOrderNameFilter = (e) => {
+    this.state.OrderNameFilter = e.target.value;
     this.FilterFn();
   };
 
   refreshList() {
-    fetch(variables.API_URL + "product")
+    fetch(variables.API_URL + "orders")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        this.setState({ products: data, productsWithoutFilter: data });
+        this.setState({ orders: data, ordersWithoutFilter: data });
       });
   }
 
@@ -79,70 +72,38 @@ export class Product extends Component {
     this.refreshList();
   }
 
-  changeIDProductType = (e) => {
-    this.setState({ IDProductType: e.target.value });
+  changeIDUser = (e) => {
+    this.setState({ IDUser: e.target.value });
   };
 
-  changeIDClass = (e) => {
-    this.setState({ IDClass: e.target.value });
+  changeTotalOrderPrice = (e) => {
+    this.setState({ TotalOrderPrice: e.target.value });
   };
 
-  changeIDOrigin = (e) => {
-    this.setState({ IDOrigin: e.target.value });
-  };
-
-  changeProductName = (e) => {
-    this.setState({ ProductName: e.target.value });
-  };
-
-  changeSupplyKG = (e) => {
-    this.setState({ SupplyKG: e.target.value });
-  };
-
-  changePriceKG = (e) => {
-    this.setState({ PriceKG: e.target.value });
-  };
-
-  changeProductDescription = (e) => {
-    this.setState({ ProductDescription: e.target.value });
-  };
-
-  changeDiscountPercentage = (e) => {
-    this.setState({ DiscountPercentage: e.target.value });
+  changeTransactionDate = (e) => {
+    this.setState({ TransactionDate: e.target.value });
   };
 
   addClick() {
     this.setState({
-      modalTitle: "Add Product",
-      IDProductType: "",
-      IDClass: "",
-      IDOrigin: "",
-      ProductName: "",
-      SupplyKG: "",
-      PriceKG: "",
-      ProductPictureURL: "defaultProduct.jpg",
-      ProductDescription: "",
-      DiscountPercentage: "",
+      modalTitle: "Add Order",
+      IDUser: "",
+      TotalOrderPrice: "",
+      TransactionDate: "",
     });
   }
-  editClick(prod) {
+  editClick(ord) {
     this.setState({
-      modalTitle: "Edit Product",
-      IDProduct: prod.idProduct,
-      IDProductType: prod.idProductType,
-      IDClass: prod.idClass,
-      IDOrigin: prod.idOrigin,
-      ProductName: prod.productName,
-      SupplyKG: prod.supplyKG,
-      PriceKG: prod.priceKG,
-      ProductPictureURL: prod.productPictureURL,
-      ProductDescription: prod.productDescription,
-      DiscountPercentage: prod.discountPercentage,
+      modalTitle: "Edit Order",
+      IDOrder: ord.idOrder,
+      IDUser: ord.idUser,
+      TotalOrderPrice: ord.totalOrderPrice,
+      TransactionDate: ord.transactionDate,
     });
   }
 
   createClick() {
-    fetch(variables.API_URL + "product", {
+    fetch(variables.API_URL + "orders", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -150,15 +111,9 @@ export class Product extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        IDProductType: this.state.IDProductType,
-        IDClass: this.state.IDClass,
-        IDOrigin: this.state.IDOrigin,
-        ProductName: this.state.ProductName,
-        SupplyKG: this.state.SupplyKG,
-        PriceKG: this.state.PriceKG,
-        ProductPictureURL: "defaultProduct.jpg",
-        ProductDescription: this.state.ProductDescription,
-        DiscountPercentage: this.state.DiscountPercentage,
+        IDUser: this.state.IDUser,
+        TotalOrderPrice: this.state.TotalOrderPrice,
+        TransactionDate: this.state.TransactionDate,
       }),
     })
       .then((res) => "Created successfuly")
@@ -174,7 +129,7 @@ export class Product extends Component {
   }
 
   updateClick() {
-    fetch(variables.API_URL + "product", {
+    fetch(variables.API_URL + "orders", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -182,16 +137,10 @@ export class Product extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        IDProduct: this.state.IDProduct,
-        IDProductType: this.state.IDProductType,
-        IDClass: this.state.IDClass,
-        IDOrigin: this.state.IDOrigin,
-        ProductName: this.state.ProductName,
-        SupplyKG: this.state.SupplyKG,
-        PriceKG: this.state.PriceKG,
-        ProductPictureURL: this.state.ProductPictureURL,
-        ProductDescription: this.state.ProductDescription,
-        DiscountPercentage: this.state.DiscountPercentage,
+        IDOrder: this.state.IDOrder,
+        IDUser: this.state.IDUser,
+        TotalOrderPrice: this.state.TotalOrderPrice,
+        TransactionDate: this.state.TransactionDate,
       }),
     })
       .then((res) => "Updated successfuly")
@@ -208,7 +157,7 @@ export class Product extends Component {
 
   deleteClick(id) {
     if (window.confirm("Are you sure?")) {
-      fetch(variables.API_URL + "product/" + id, {
+      fetch(variables.API_URL + "orders/" + id, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -229,37 +178,14 @@ export class Product extends Component {
     }
   }
 
-  imageUpload = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("file", e.target.files[0], e.target.files[0].name);
-
-    fetch(variables.API_URL + "users/photo", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ ProductPictureURL: data });
-      });
-  };
-
   render() {
     const {
-      products,
+      orders,
       modalTitle,
-      IDProduct,
-      IDProductType,
-      IDClass,
-      IDOrigin,
-      ProductName,
-      SupplyKG,
-      PriceKG,
-      ProductPictureURL,
-      ProductDescription,
-      DiscountPercentage,
-      PhotoPath,
+      IDOrder,
+      IDUser,
+      TotalOrderPrice,
+      TransactionDate,
     } = this.state;
 
     return (
@@ -271,7 +197,7 @@ export class Product extends Component {
           data-bs-target="#exampleModal"
           onClick={() => this.addClick()}
         >
-          Add Product
+          Add Order
         </button>
         <table className="table table-striped">
           <thead>
@@ -280,14 +206,14 @@ export class Product extends Component {
                 <div className="d-flex flex-row">
                   <input
                     className="form-control m-2"
-                    onChange={this.changeIDProductFilter}
+                    onChange={this.changeIDOrderFilter}
                     placeholder="Filter"
                   />
 
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("IDProduct", true)}
+                    onClick={() => this.sortResult("IDOrder", true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +230,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("IDProduct", false)}
+                    onClick={() => this.sortResult("IDOrder", false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -318,20 +244,20 @@ export class Product extends Component {
                     </svg>
                   </button>
                 </div>
-                IDProduct
+                IDOrder
               </th>
               <th>
                 <div className="d-flex flex-row">
                   <input
                     className="form-control m-2"
-                    onChange={this.changeProductNameFilter}
+                    onChange={this.changeOrderNameFilter}
                     placeholder="Filter"
                   />
 
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("ProductName", true)}
+                    onClick={() => this.sortResult("OrderName", true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +274,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("ProductName", false)}
+                    onClick={() => this.sortResult("OrderName", false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -362,30 +288,25 @@ export class Product extends Component {
                     </svg>
                   </button>
                 </div>
-                ProductName
+                OrderName
               </th>
               <th>Options</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((prod) => (
-              <tr key={prod.idProduct}>
-                <td>{prod.idProduct}</td>
-                <td>{prod.idProductType}</td>
-                <td>{prod.idClass}</td>
-                <td>{prod.idOrigin}</td>
-                <td>{prod.productName}</td>
-                <td>{prod.supplyKG}</td>
-                <td>{prod.priceKG}</td>
-                <td>{prod.productDescription}</td>
-                <td>{prod.discountPercentage}</td>
+            {orders.map((ord) => (
+              <tr key={ord.idOrder}>
+                <td>{ord.idOrder}</td>
+                <td>{ord.idUser}</td>
+                <td>{ord.totalOrderPrice}</td>
+                <td>{ord.transactionDate}</td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-light mr-1"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
-                    onClick={() => this.editClick(prod)}
+                    onClick={() => this.editClick(ord)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -406,7 +327,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light mr-1"
-                    onClick={() => this.deleteClick(prod.idProduct)}
+                    onClick={() => this.deleteClick(ord.idOrder)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -445,91 +366,36 @@ export class Product extends Component {
 
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Product Type</span>
+                  <span className="input-group-text">User</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={IDProductType}
-                    onChange={this.changeIDProductType}
+                    value={IDUser}
+                    onChange={this.changeIDUser}
                   />
                 </div>
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Class</span>
+                  <span className="input-group-text">Total order price</span>
                   <input
                     type="text"
                     className="form-control"
-                    value={IDClass}
-                    onChange={this.changeIDClass}
+                    value={TotalOrderPrice}
+                    onChange={this.changeTotalOrderPrice}
                   />
                 </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Origin</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={IDOrigin}
-                    onChange={this.changeIDOrigin}
-                  />
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Product Name</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={ProductName}
-                    onChange={this.changeProductName}
-                  />
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Supply in KG</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={SupplyKG}
-                    onChange={this.changeSupplyKG}
-                  />
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Price per KG</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={PriceKG}
-                    onChange={this.changePriceKG}
-                  />
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Product Description</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={ProductDescription}
-                    onChange={this.changeProductDescription}
-                  />
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">Discount percentage</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={DiscountPercentage}
-                    onChange={this.changeDiscountPercentage}
-                  />
-                </div>
-                <div className="p-2 w-50 bd-highlight">
-                    <img
-                      width="250px"
-                      height="250px"
-                      src={PhotoPath + ProductPictureURL}
-                    />
+                {IDOrder != 0 ? (
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">Transaction date</span>
                     <input
-                      className="m-2"
-                      type="file"
-                      onChange={this.imageUpload}
+                      type="date"
+                      className="form-control"
+                      value={TransactionDate}
+                      onChange={this.changeTransactionDate}
                     />
                   </div>
+                ) : null}
 
-                {IDProduct == 0 ? (
+                {IDOrder == 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -539,7 +405,7 @@ export class Product extends Component {
                   </button>
                 ) : null}
 
-                {IDProduct != 0 ? (
+                {IDOrder != 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"

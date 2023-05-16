@@ -272,7 +272,7 @@ export class Users extends Component {
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     onClick={() => this.editClick(user)}
-                    disabled="true"
+                    disabled={true}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

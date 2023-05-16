@@ -28,6 +28,15 @@ export class Login_register extends Component {
     };
   }
 
+  myFunction() {
+    var x = document.getElementById("loginPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
   changeLoginUsername = (e) => {
     this.setState({ LoginUsername: e.target.value });
   };
@@ -164,7 +173,7 @@ export class Login_register extends Component {
                           </div>
                           <div className="form-outline mb-4">
                             <input
-                              type="text"
+                              type="password"
                               id="loginPassword"
                               className="form-control form-control-lg"
                               value={LoginPassword}
@@ -177,6 +186,8 @@ export class Login_register extends Component {
                               Password
                             </label>
                           </div>
+
+                          <input type="checkbox" onClick={() => this.myFunction()} />Show Password
 
                           <div className="d-flex justify-content-end pt-3">
                             <button
@@ -208,7 +219,7 @@ export class Login_register extends Component {
                               <div className="form-outline">
                                 <input
                                   type="text"
-                                  id="form3Example1m"
+                                  id="firstName"
                                   className="form-control form-control-lg"
                                   value={FirstName}
                                   onChange={this.changeFirstName}
@@ -225,7 +236,7 @@ export class Login_register extends Component {
                               <div className="form-outline">
                                 <input
                                   type="text"
-                                  id="form3Example1n"
+                                  id="lastName"
                                   className="form-control form-control-lg"
                                   value={LastName}
                                   onChange={this.changeLastName}
@@ -245,7 +256,7 @@ export class Login_register extends Component {
                               <div className="form-outline">
                                 <input
                                   type="text"
-                                  id="form3Example1m"
+                                  id="adress"
                                   className="form-control form-control-lg"
                                   value={Adress}
                                   onChange={this.changeAdress}
@@ -262,7 +273,7 @@ export class Login_register extends Component {
                               <div className="form-outline">
                                 <input
                                   type="text"
-                                  id="form3Example1n"
+                                  id="city"
                                   className="form-control form-control-lg"
                                   value={City}
                                   onChange={this.changeCity}
@@ -281,7 +292,7 @@ export class Login_register extends Component {
                               <div className="form-outline">
                                 <input
                                   type="text"
-                                  id="form3Example1m"
+                                  id="phone"
                                   className="form-control form-control-lg"
                                   value={Phone}
                                   onChange={this.changePhone}
@@ -298,7 +309,7 @@ export class Login_register extends Component {
                               <div className="form-outline">
                                 <input
                                   type="text"
-                                  id="form3Example1n"
+                                  id="username"
                                   className="form-control form-control-lg"
                                   value={Username}
                                   onChange={this.changeUsername}
@@ -316,7 +327,7 @@ export class Login_register extends Component {
                           <div className="form-outline mb-4">
                             <input
                               type="text"
-                              id="form3Example90"
+                              id="email"
                               className="form-control form-control-lg"
                               value={Email}
                               onChange={this.changeEmail}
@@ -332,7 +343,7 @@ export class Login_register extends Component {
                           <div className="form-outline mb-4">
                             <input
                               type="text"
-                              id="form3Example97"
+                              id="password"
                               className="form-control form-control-lg"
                               value={PwdHash}
                               onChange={this.changePwdHash}
