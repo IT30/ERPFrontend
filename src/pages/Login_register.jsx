@@ -87,7 +87,7 @@ export class Login_register extends Component {
       .then(
         (data) => {
           localStorage.setItem("token", data.token);
-          console.log(localStorage);
+          console.log(localStorage.token);
         },
         (error) => {
           alert("Failed");

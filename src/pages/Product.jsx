@@ -32,7 +32,7 @@ export class Product extends Component {
 
     var filteredData = this.state.productsWithoutFilter.filter(function (el) {
       return (
-        el.IDProduct.toString()
+        el.idProduct.toString()
           .toLowerCase()
           .includes(IDProductFilter.toString().trim().toLowerCase()) &&
         el.productName
@@ -287,7 +287,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("IDProduct", true)}
+                    onClick={() => this.sortResult("idProduct", true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +304,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("IDProduct", false)}
+                    onClick={() => this.sortResult("idProduct", false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -331,7 +331,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("ProductName", true)}
+                    onClick={() => this.sortResult("productName", true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +348,7 @@ export class Product extends Component {
                   <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => this.sortResult("ProductName", false)}
+                    onClick={() => this.sortResult("productName", false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -362,9 +362,15 @@ export class Product extends Component {
                     </svg>
                   </button>
                 </div>
-                ProductName
+                IDProductType
               </th>
-              <th>Options</th>
+              <th>IDClass</th>
+              <th>IDOrigin</th>
+              <th>Product name</th>
+              <th>Supply(KG)</th>
+              <th>Price(KG)</th>
+              <th>Product description</th>
+              <th>Discount(%)</th>
             </tr>
           </thead>
           <tbody>
